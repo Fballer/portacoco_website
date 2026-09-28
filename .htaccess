@@ -18,3 +18,12 @@ ErrorDocument 404 /
   # Redirect any non-existent page, old WordPress permalink, or broken URL to homepage
   RewriteRule ^.*$ / [R=302,L]
 </IfModule>
+
+# Force mobile browsers (especially Chrome Android) to always re-fetch fresh HTML
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>

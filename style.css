@@ -228,15 +228,16 @@ button {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
 }
 
 .nav-link {
-  font-size: 0.93rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--transition-fast);
   padding: 4px 0;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -244,11 +245,16 @@ button {
 }
 
 .nav-link.highlight-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
   color: var(--coco-green);
   background: var(--coco-green-glow);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-green);
+  line-height: 1.2;
 }
 
 .nav-link.highlight-pill:hover {
@@ -1267,7 +1273,20 @@ button {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .nav-list {
+    gap: 14px;
+  }
+  .nav-link {
+    font-size: 0.86rem;
+  }
+  .nav-link.highlight-pill {
+    padding: 5px 10px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 1024px) {
   .main-nav {
     display: none;
     position: absolute;
@@ -1277,6 +1296,7 @@ button {
     background: var(--bg-surface);
     border-bottom: 1px solid var(--border-strong);
     padding: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
   }
 
   .main-nav.active {
@@ -1292,7 +1312,9 @@ button {
   .mobile-toggle {
     display: flex;
   }
+}
 
+@media (max-width: 768px) {
   .advisory-card {
     padding: 28px 20px;
   }

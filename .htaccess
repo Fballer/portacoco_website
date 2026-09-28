@@ -1,20 +1,20 @@
 # ==============================================================================
 # PortaCoCo Apache Configuration (.htaccess)
-# Redirect all 404 errors and non-existent URLs to the main index page
+# Redirect all 404 errors and old/broken URLs directly to the homepage
 # ==============================================================================
 
-# Standard Apache Error Document Directive
-ErrorDocument 404 /index.html
+# Redirect standard 404 error requests to root
+ErrorDocument 404 /
 
-# Mod_Rewrite Catch-All Rule
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # If requested path is not an existing file
-  RewriteCond %{REQUEST_FILENAME} !-f
-  # And not an existing directory
-  RewriteCond %{REQUEST_FILENAME} !-d
-  # Route cleanly to index.html
-  RewriteRule ^ index.html [L]
+  # Allow existing static files (CSS, JS, images, zip) to load without redirection
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Redirect any non-existent page, old WordPress permalink, or broken URL to homepage
+  RewriteRule ^.*$ / [R=302,L]
 </IfModule>

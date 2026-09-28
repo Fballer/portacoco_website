@@ -1042,9 +1042,15 @@ button {
   padding: 20px;
 }
 
+.comp-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
 .comp-title {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: var(--coco-cream);
   margin-bottom: 6px;

@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link, .btn-outline-sm');
 
   if (mobileToggle && mainNav) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
       mobileToggle.setAttribute('aria-expanded', !isExpanded);
+      mobileToggle.classList.toggle('active');
       mainNav.classList.toggle('active');
     });
 
@@ -17,9 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         if (mainNav.classList.contains('active')) {
           mainNav.classList.remove('active');
+          mobileToggle.classList.remove('active');
           mobileToggle.setAttribute('aria-expanded', 'false');
         }
       });
+    });
+
+    // Close menu when tapping outside of header
+    document.addEventListener('click', (e) => {
+      if (mainNav.classList.contains('active') && !mainNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+        mainNav.classList.remove('active');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -34,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         await navigator.clipboard.writeText(email);
         tooltip.textContent = 'Copied!';
-        copyBtn.style.color = '#10b981';
-        copyBtn.style.borderColor = '#10b981';
+        copyBtn.style.color = '#00e676';
+        copyBtn.style.borderColor = '#00e676';
 
         setTimeout(() => {
           tooltip.textContent = 'Copy';
